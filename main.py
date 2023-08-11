@@ -1,162 +1,149 @@
-# Python program to create a simple GUI
-# calculator using Tkinter
+from tkinter import * # Importando biblioteca gráfica
 
-# import everything from tkinter module
-from tkinter import *
+expression = "" # Declarando variavel do valor atual
+btn_color = "cyan" # cor do botao
+win_color = "light gray" # cor da janela
+txt_color = "black" # cor dos texto
+btn_width = 12
+btn_height = 2
 
-# globally declare the expression variable
-expression = ""
-
-
-# Function to update expression
-# in the text entry box
+# Funcao que atualiza o valor no leitor
 def press(num):
-	# point out the global expression variable
+	# aponta para o valor atual
 	global expression
 
-	# concatenation of string
+	# adiciona o valor inserido ao valor atual
 	expression = expression + str(num)
 
-	# update the expression by using set method
+	# atualiza o valor pelo metodo set
 	equation.set(expression)
 
 
-# Function to evaluate the final expression
+# Funcao que valida a expressao atual
 def equalpress():
-	# Try and except statement is used
-	# for handling the errors like zero
-	# division error etc.
+	# Tenta validar, exibe "error" caso aconteça
 
-	# Put that code inside the try block
-	# which may generate the error
 	try:
 
 		global expression
 
-		# eval function evaluate the expression
-		# and str function convert the result
-		# into string
+		# realiza os calculos e converte o resultado para str
 		total = str(eval(expression))
 
 		equation.set(total)
 
-		# initialize the expression variable
-		# by empty string
+		# inicia o valor do visor como vazio
 		expression = ""
 
-	# if error is generate then handle
-	# by the except block
+	 # caso tenha algum erro no processo irá exibir erro
+	 # e mudar o valor para vazio
 	except:
 
 		equation.set(" error ")
 		expression = ""
 
 
-# Function to clear the contents
-# of text entry box
+# Funcao que limpa o valor do visor
+
 def clear():
 	global expression
 	expression = ""
 	equation.set("")
 
 
-# Driver code
+# Finalmente o código principal da calculadora
 if __name__ == "__main__":
-	# create a GUI window
+	# Cria uma janela com o Tkinter
+	# a variavel gui e um acronimo para "Graphical user interface"
 	gui = Tk()
 
-	# set the background colour of GUI window
-	gui.configure(background="light gray")
+	# Define a cor de fundo da janela
+	gui.configure(background=win_color)
 
-	# set the title of GUI window
-	gui.title("Calculator in Python")
+	# Define o nome da janela
+	gui.title("Calculadora em Python")
 
-	# set the configuration of GUI window
-	gui.geometry("420x360")
+	# Define as dimensões da janela
+	gui.geometry("376x220")
 
-	# StringVar() is the variable class
-	# we create an instance of this class
+	# Instanciando uma classe str
 	equation = StringVar()
 
-	# create the text entry box for
-	# showing the expression .
+	# Criando o campo do valor atual
 	expression_field = Entry(gui, textvariable=equation)
 
-	# grid method is used for placing
-	# the widgets at respective positions
-	# in table like structure .
-	expression_field.grid(columnspan=4, ipadx=70)
+	# O metodo grid e usado para posicionar objetos
+	# conforme a posicao na documentacao da biblioteca
+	expression_field.grid(columnspan=40, ipadx=125)
 
-	# create a Buttons and place at a particular
-	# location inside the root window .
-	# when user press the button, the command or
-	# function affiliated to that button is executed .
-	button1 = Button(gui, text=' 1 ', fg='black', bg='cyan',
-					command=lambda: press(1), height=1, width=7)
+	# Cria, posiciona e atribui cores e funcoes aos botoes
+	button1 = Button(gui, text=' 1 ', fg=txt_color, bg=btn_color,
+					command=lambda: press(1), height=btn_height, width=btn_width)
 	button1.grid(row=2, column=0)
 
-	button2 = Button(gui, text=' 2 ', fg='black', bg='cyan',
-					command=lambda: press(2), height=1, width=7)
+	button2 = Button(gui, text=' 2 ', fg=txt_color, bg=btn_color,
+					command=lambda: press(2), height=btn_height, width=btn_width)
 	button2.grid(row=2, column=1)
 
-	button3 = Button(gui, text=' 3 ', fg='black', bg='cyan',
-					command=lambda: press(3), height=1, width=7)
+	button3 = Button(gui, text=' 3 ', fg=txt_color, bg=btn_color,
+					command=lambda: press(3), height=btn_height, width=btn_width)
 	button3.grid(row=2, column=2)
 
-	button4 = Button(gui, text=' 4 ', fg='black', bg='cyan',
-					command=lambda: press(4), height=1, width=7)
+	button4 = Button(gui, text=' 4 ', fg=txt_color, bg=btn_color,
+					command=lambda: press(4), height=btn_height, width=btn_width)
 	button4.grid(row=3, column=0)
 
-	button5 = Button(gui, text=' 5 ', fg='black', bg='cyan',
-					command=lambda: press(5), height=1, width=7)
+	button5 = Button(gui, text=' 5 ', fg=txt_color, bg=btn_color,
+					command=lambda: press(5), height=btn_height, width=btn_width)
 	button5.grid(row=3, column=1)
 
-	button6 = Button(gui, text=' 6 ', fg='black', bg='cyan',
-					command=lambda: press(6), height=1, width=7)
+	button6 = Button(gui, text=' 6 ', fg=txt_color, bg=btn_color,
+					command=lambda: press(6), height=btn_height, width=btn_width)
 	button6.grid(row=3, column=2)
 
-	button7 = Button(gui, text=' 7 ', fg='black', bg='cyan',
-					command=lambda: press(7), height=1, width=7)
+	button7 = Button(gui, text=' 7 ', fg=txt_color, bg=btn_color,
+					command=lambda: press(7), height=btn_height, width=btn_width)
 	button7.grid(row=4, column=0)
 
-	button8 = Button(gui, text=' 8 ', fg='black', bg='cyan',
-					command=lambda: press(8), height=1, width=7)
+	button8 = Button(gui, text=' 8 ', fg=txt_color, bg=btn_color,
+					command=lambda: press(8), height=btn_height, width=btn_width)
 	button8.grid(row=4, column=1)
 
-	button9 = Button(gui, text=' 9 ', fg='black', bg='cyan',
-					command=lambda: press(9), height=1, width=7)
+	button9 = Button(gui, text=' 9 ', fg=txt_color, bg=btn_color,
+					command=lambda: press(9), height=btn_height, width=btn_width)
 	button9.grid(row=4, column=2)
 
-	button0 = Button(gui, text=' 0 ', fg='black', bg='cyan',
-					command=lambda: press(0), height=1, width=7)
+	button0 = Button(gui, text=' 0 ', fg=txt_color, bg=btn_color,
+					command=lambda: press(0), height=btn_height, width=btn_width)
 	button0.grid(row=5, column=0)
 
-	plus = Button(gui, text=' + ', fg='black', bg='cyan',
-				command=lambda: press("+"), height=1, width=7)
+	plus = Button(gui, text=' + ', fg=txt_color, bg=btn_color,
+				command=lambda: press("+"), height=btn_height, width=btn_width)
 	plus.grid(row=2, column=3)
 
-	minus = Button(gui, text=' - ', fg='black', bg='cyan',
-				command=lambda: press("-"), height=1, width=7)
+	minus = Button(gui, text=' - ', fg=txt_color, bg=btn_color,
+				command=lambda: press("-"), height=btn_height, width=btn_width)
 	minus.grid(row=3, column=3)
 
-	multiply = Button(gui, text=' * ', fg='black', bg='cyan',
-					command=lambda: press("*"), height=1, width=7)
+	multiply = Button(gui, text=' * ', fg=txt_color, bg=btn_color,
+					command=lambda: press("*"), height=btn_height, width=btn_width)
 	multiply.grid(row=4, column=3)
 
-	divide = Button(gui, text=' / ', fg='black', bg='cyan',
-					command=lambda: press("/"), height=1, width=7)
+	divide = Button(gui, text=' / ', fg=txt_color, bg=btn_color,
+					command=lambda: press("/"), height=btn_height, width=btn_width)
 	divide.grid(row=5, column=3)
 
-	equal = Button(gui, text=' = ', fg='black', bg='cyan',
-				command=equalpress, height=1, width=7)
+	equal = Button(gui, text=' = ', fg=txt_color, bg=btn_color,
+				command=equalpress, height=btn_height, width=btn_width)
 	equal.grid(row=5, column=2)
 
-	clear = Button(gui, text='Clear', fg='black', bg='cyan',
-				command=clear, height=1, width=7)
+	clear = Button(gui, text='Clear', fg=txt_color, bg=btn_color,
+				command=clear, height=btn_height, width=btn_width)
 	clear.grid(row=5, column='1')
 
-	Decimal= Button(gui, text='.', fg='black', bg='cyan',
-					command=lambda: press('.'), height=1, width=7)
+	Decimal= Button(gui, text='.', fg=txt_color, bg=btn_color,
+					command=lambda: press('.'), height=btn_height, width=btn_width)
 	Decimal.grid(row=6, column=0)
-	# start the GUI
+
+	# Mantem a janela aberta em loop
 	gui.mainloop()
